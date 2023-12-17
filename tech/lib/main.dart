@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'Strings.dart';
 
 void main() {
   runApp(const HomePage());

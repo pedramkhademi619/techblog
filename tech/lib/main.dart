@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tech/gen/assets.gen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(HomePage());
+  runApp(const HomePage());
 }
 
 class HomePage extends StatefulWidget {
@@ -14,10 +16,19 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('fa'), // Persian
+      ],
       home: Scaffold(
         body: Center(
-          child: Text("سلام"),
+          child: Image(image: Assets.images.icon.provider()),
         ),
       ),
     );

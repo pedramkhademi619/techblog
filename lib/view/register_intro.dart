@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech/view/my_cats.dart';
 
 import '../gen/assets.gen.dart';
-import '../strings.dart';
+import '../components/strings.dart';
 import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatefulWidget {

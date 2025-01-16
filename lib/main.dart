@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tech/view/my_cats.dart';
 
-import 'my_colors.dart';
+import 'package:tech/components/my_colors.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -25,7 +25,6 @@ class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       theme: ThemeData(
           inputDecorationTheme: InputDecorationTheme(
               filled: true,

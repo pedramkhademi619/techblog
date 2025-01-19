@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:tech/components/api_constants.dart';
+import 'package:tech/components/my_components.dart';
+import 'package:tech/components/strings.dart';
+import 'package:tech/controller/home_screen_controller.dart';
+import 'package:tech/services/dio_service.dart';
 
-import '../gen/assets.gen.dart';
 import '../components/my_colors.dart';
+import '../gen/assets.gen.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
 final GlobalKey<ScaffoldState> key = GlobalKey();
-class _MainScreenState extends State<MainScreen> {
-  var selectedPageIndex = 0;
+
+class MainScreen extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
+
+  MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -22,13 +25,12 @@ class _MainScreenState extends State<MainScreen> {
     var textTheme = Theme.of(context).textTheme;
 
     return SafeArea(
-      
       child: Scaffold(
         key: key,
         drawer: Drawer(
           backgroundColor: SolidColors.scaffoldBg,
           child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: bodyMargin),
+            padding: EdgeInsets.symmetric(horizontal: bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -59,7 +61,9 @@ class _MainScreenState extends State<MainScreen> {
                     "اشتراک گذاری تک بلاگ",
                     style: textTheme.titleSmall,
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                    await Share.share(MyStrings.shareText);
+                  },
                 ),
                 const Divider(
                   color: SolidColors.dividerColor,
@@ -69,7 +73,9 @@ class _MainScreenState extends State<MainScreen> {
                     "تک بلاگ در گیت هاب",
                     style: textTheme.titleSmall,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    myLaunchUrl(MyStrings.techBlogGitHubUrl);
+                  },
                 ),
                 const Divider(
                   color: SolidColors.dividerColor,
@@ -83,14 +89,12 @@ class _MainScreenState extends State<MainScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              
-                 IconButton(
-                  icon: const Icon(Icons.menu),
-                  onPressed: () {
-                    key.currentState!.openDrawer();
-                  },
-                ),
-              
+              IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  key.currentState!.openDrawer();
+                },
+              ),
               Image(
                 image: Assets.images.logo.provider(),
                 height: size.height / 13.6,
@@ -101,23 +105,22 @@ class _MainScreenState extends State<MainScreen> {
         ),
         body: SafeArea(
           child: Stack(children: [
-            Positioned.fill(
-                child: IndexedStack(
-              index: selectedPageIndex,
-              children: [
-                HomeScreen(
-                    size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-                ProfileScreen(
-                    size: size, textTheme: textTheme, bodyMargin: bodyMargin)
-              ],
-            )),
+            Positioned.fill(child: Obx(() {
+              return IndexedStack(
+                index: selectedPageIndex.value,
+                children: [
+                  HomeScreen(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  ProfileScreen(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin)
+                ],
+              );
+            })),
             BottomNav(
               size: size,
               bodyMargin: bodyMargin,
               changeScreen: (int pageIndex) {
-                setState(() {
-                  selectedPageIndex = pageIndex;
-                });
+                selectedPageIndex.value = pageIndex;
               },
             ),
           ]),

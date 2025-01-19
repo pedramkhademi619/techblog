@@ -44,7 +44,7 @@ class _MyCatsState extends State<MyCats> {
                 child: TextField(
                   onSubmitted: (value) {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (builder) => const MainScreen()));
+                        builder: (builder) =>  MainScreen()));
                   },
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(

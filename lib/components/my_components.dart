@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tech/Models/fake_data.dart';
 import 'package:tech/gen/assets.gen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'my_colors.dart';
 
@@ -23,17 +24,14 @@ class TechDivider extends StatelessWidget {
   }
 }
 
-
-
 class MainTags extends StatelessWidget {
   const MainTags({
     super.key,
     required this.index,
     required this.textTheme,
-   
   });
-final int index;
-final TextTheme textTheme;
+  final int index;
+  final TextTheme textTheme;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,8 +40,7 @@ final TextTheme textTheme;
               colors: GradiantColors.tags,
               begin: Alignment.bottomRight,
               end: Alignment.centerLeft),
-          borderRadius:
-              BorderRadius.all(Radius.circular(24))),
+          borderRadius: BorderRadius.all(Radius.circular(24))),
       height: 60,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
@@ -59,12 +56,21 @@ final TextTheme textTheme;
             ),
             Text(
               tagList[index].title,
-              style:
-                  textTheme.headlineMedium,
+              style: textTheme.headlineMedium,
             ),
           ],
         ),
       ),
     );
   }
+}
+
+myLaunchUrl(String url) async {
+  Uri uri = Uri.parse(url);
+
+  // if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  // } else {
+    // print('Could not launch $url');
+  // }
 }

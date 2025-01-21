@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tech/components/api_constants.dart';
+import 'package:tech/components/my_colors.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/components/strings.dart';
-import 'package:tech/controller/home_screen_controller.dart';
-import 'package:tech/services/dio_service.dart';
-
-import '../components/my_colors.dart';
-import '../gen/assets.gen.dart';
+import 'package:tech/gen/assets.gen.dart';
+import 'package:tech/view/main_screen/profile_screen.dart';
 import 'home_screen.dart';
-import 'profile_screen.dart';
 
 final GlobalKey<ScaffoldState> key = GlobalKey();
 

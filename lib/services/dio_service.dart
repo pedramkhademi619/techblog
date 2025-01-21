@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'dart:developer';
 
 class DioService {
   Future<dynamic> getMethod(String url) async {
@@ -14,6 +13,3 @@ class DioService {
     });
   }
 }
-
-
-

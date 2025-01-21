@@ -1,3 +1,5 @@
+import 'package:tech/components/api_constants.dart';
+
 class PodCastModel {
   String? id;
   String? title;
@@ -13,12 +15,12 @@ class PodCastModel {
       required this.publisher,
       required this.view,
       required this.createdAt});
-  PodCastModel.fromJson(Map<String, dynamic> element){
-    id =  element["id"];
+  PodCastModel.fromJson(Map<String, dynamic> element) {
+    id = element["id"];
     title = element["title"];
-    poster = element["poster"];
+    poster = ApiConstants.hostDlUrl + element["poster"];
     publisher = element["publisher"];
-    view  = element["view"];
+    view = element["view"];
     createdAt = element["createdAt"];
   }
 }

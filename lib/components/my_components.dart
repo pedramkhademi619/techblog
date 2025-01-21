@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tech/Models/fake_data.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/instance_manager.dart';
+import 'package:tech/controller/home_screen_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,7 +27,7 @@ class TechDivider extends StatelessWidget {
 }
 
 class MainTags extends StatelessWidget {
-  const MainTags({
+  MainTags({
     super.key,
     required this.index,
     required this.textTheme,
@@ -55,7 +57,7 @@ class MainTags extends StatelessWidget {
               width: 8,
             ),
             Text(
-              tagList[index].title,
+              Get.find<HomeScreenController>().tagsList[index].title!,
               style: textTheme.headlineMedium,
             ),
           ],
@@ -69,8 +71,13 @@ myLaunchUrl(String url) async {
   Uri uri = Uri.parse(url);
 
   // if (await canLaunchUrl(uri)) {
-    await launchUrl(uri);
+  await launchUrl(uri);
   // } else {
-    // print('Could not launch $url');
+  // print('Could not launch $url');
   // }
 }
+
+Widget loading() => const SpinKitFadingCube(
+      color: SolidColors.primaryColor,
+      size: 32,
+    );

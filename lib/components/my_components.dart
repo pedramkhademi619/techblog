@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:tech/controller/home_screen_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -81,3 +82,43 @@ Widget loading() => const SpinKitFadingCube(
       color: SolidColors.primaryColor,
       size: 32,
     );
+
+PreferredSize appBar(String title, context) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(80),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Center(
+              child: Text(title,
+                  style: const TextStyle(
+                      color: SolidColors.primaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'dana')),
+            ),
+          ),
+        ],
+        leading: Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: InkWell(
+            onTap: () => Get.back(),
+            child: Ink(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: SolidColors.primaryColor.withAlpha(100)),
+              child: const Icon(CupertinoIcons.arrow_right),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}

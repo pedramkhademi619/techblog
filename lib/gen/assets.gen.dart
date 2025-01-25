@@ -73,6 +73,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/ramzon.png
   AssetGenImage get ramzon => const AssetGenImage('assets/images/ramzon.png');
 
+  /// File path: assets/images/single_place_holder.jpg
+  AssetGenImage get singlePlaceHolder =>
+      const AssetGenImage('assets/images/single_place_holder.jpg');
+
   /// File path: assets/images/tecnocast.png
   AssetGenImage get tecnocast =>
       const AssetGenImage('assets/images/tecnocast.png');
@@ -86,6 +90,7 @@ class $AssetsImagesGen {
         postertest,
         radiocodeyad,
         ramzon,
+        singlePlaceHolder,
         tecnocast
       ];
 }

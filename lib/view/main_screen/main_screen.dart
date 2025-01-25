@@ -5,7 +5,9 @@ import 'package:tech/components/my_colors.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/components/strings.dart';
 import 'package:tech/gen/assets.gen.dart';
+import 'package:tech/view/article_list_screen.dart';
 import 'package:tech/view/main_screen/profile_screen.dart';
+
 import 'home_screen.dart';
 
 final GlobalKey<ScaffoldState> key = GlobalKey();
@@ -170,7 +172,9 @@ class BottomNav extends StatelessWidget {
                   color: Colors.white,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(ArticleListScreen());
+                  },
                   icon: ImageIcon(Assets.icons.write.provider()),
                   color: Colors.white,
                 ),

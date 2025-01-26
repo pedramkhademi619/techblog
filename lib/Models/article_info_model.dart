@@ -11,30 +11,21 @@ class ArticleInfoModel {
   String? catName;
   String? status;
   String? createdAt;
-
-  ArticleInfoModel({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.image,
-    required this.author,
-    required this.catId,
-    required this.view,
-    required this.catName,
-    required this.status,
-    required this.createdAt,
-  });
+  bool? isFavorite;
+ ArticleInfoModel();
 
   ArticleInfoModel.fromJson(Map<String, dynamic> element) {
-    id = element['id'];
-    title = element['title'];
-    content = element['content'];
-    image = ApiConstants.hostDlUrl + element['image'];
-    author = element['author'];
-    catId = element['cat_id'];
-    view = element['view'];
-    catName = element['cat_name'];
-    status = element['status'];
-    createdAt = element['created_at'];
+    var info = element["info"];
+    id = info['id'];
+    title = info['title'];
+    content = info['content'];
+    image = ApiConstants.hostDlUrl + info['image'];
+    author = info['author'];
+    catId = info['cat_id'];
+    view = info['view'];
+    catName = info['cat_name'];
+    status = info['status'];
+    createdAt = info['created_at'];
+    isFavorite = element["isFavorite"];
   }
 }

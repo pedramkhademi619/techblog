@@ -5,153 +5,173 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:tech/components/my_colors.dart';
 import 'package:tech/components/my_components.dart';
+import 'package:tech/controller/list_article_controller.dart';
 import 'package:tech/controller/single_article_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
+import 'package:tech/view/article_list_screen.dart';
+
+
 
 class Single extends StatelessWidget {
-
-
-
-   SingleArticleController singleArticleController =
+  SingleArticleController singleArticleController =
       Get.put(SingleArticleController());
 
   Single({super.key});
 
+ 
   @override
   Widget build(BuildContext context) {
-    singleArticleController.getArticleInfo();
     RxBool select = false.obs;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Obx(
-            () => singleArticleController.loading.value == false? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(children: [
-                  CachedNetworkImage(
-                    imageUrl:
-                        singleArticleController.articleInfoModel.value.image!,
-                    imageBuilder: (context, imageProvider) => Image(image: imageProvider),
-                    placeholder: (context, url) => loading(),
-                    errorWidget: (context, url, error) => Image.asset(Assets.images.singlePlaceHolder.path),
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    left: 0,
-                    child: Container(
-                      height: 60,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: GradiantColors.singleAppbarGradiant),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                            icon: const Icon(
-                              CupertinoIcons.arrow_right,
-                              color: Colors.white,
-                            ),
-                            onPressed: () => Get.back(),
-                          ),
-                          const Expanded(child: SizedBox()),
-                          IconButton(
-                            onPressed: () {
-                              select.value = !select.value;
-                            },
-                            icon: Icon(
-                                select.value == false
-                                    ? Icons.bookmark_add_outlined
-                                    : Icons.bookmark_remove,
-                                color: Colors.white),
-                          ),
-                          const SizedBox(
-                            width: 32,
-                          ),
-                          const Icon(Icons.share, color: Colors.white),
-                        ],
-                      ),
-                    ),
-                  ),
-                ]),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-                  child: Text(
-                    singleArticleController.articleInfoModel.value.title!,
-                    style: Get.textTheme.headlineLarge!
-                        .copyWith(color: Colors.black),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-                  child: Row(
+            () => singleArticleController.loading.value == false
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(
-                        Icons.person,
-                        color: SolidColors.seeMore,
+                      Stack(children: [
+                        CachedNetworkImage(
+                          imageUrl: singleArticleController
+                              .articleInfoModel.value.image!,
+                          imageBuilder: (context, imageProvider) =>
+                              Image(image: imageProvider),
+                          placeholder: (context, url) => loading(),
+                          errorWidget: (context, url, error) =>
+                              Image.asset(Assets.images.singlePlaceHolder.path),
+                        ),
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          left: 0,
+                          child: Container(
+                            height: 60,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: GradiantColors.singleAppbarGradiant),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.arrow_right,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () => Get.back(),
+                                ),
+                                const Expanded(child: SizedBox()),
+                                IconButton(
+                                  onPressed: () {
+                                    select.value = !select.value;
+                                  },
+                                  icon: Icon(
+                                      select.value == false
+                                          ? Icons.bookmark_add_outlined
+                                          : Icons.bookmark_remove,
+                                      color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  width: 32,
+                                ),
+                                const Icon(Icons.share, color: Colors.white),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ]),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                        child: Text(
+                          singleArticleController.articleInfoModel.value.title!,
+                          style: Get.textTheme.headlineLarge!
+                              .copyWith(color: Colors.black),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
                       ),
-                      Text(
-                         singleArticleController.articleInfoModel.value.author!,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.person,
+                              color: SolidColors.seeMore,
+                            ),
+                            Text(
+                              singleArticleController
+                                  .articleInfoModel.value.author!,
+                            ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Text(singleArticleController
+                                    .articleInfoModel.value.createdAt ??
+                                "دو روز پیش"),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: HtmlWidget(
+                          singleArticleController
+                              .articleInfoModel.value.content!,
+                          enableCaching: true,
+                          textStyle: Get.textTheme.titleMedium,
+                        ),
                       ),
                       const SizedBox(
-                        width: 16,
+                        height: 30,
                       ),
-                      Text( singleArticleController.articleInfoModel.value.createdAt ??
-                          "دو روز پیش"),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: HtmlWidget(
-                     singleArticleController.articleInfoModel.value.content!,enableCaching: true, textStyle: Get.textTheme.titleMedium,
-                    
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                SizedBox(
-                  height: 50,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: singleArticleController.tags.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 40,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Center(
-                              child: Text(
-                                  singleArticleController.tags[index].title!)),
+                      tags(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 30, 16, 16),
+                        child: Text(
+                          "نوشته های مرتبط",
+                          style: Get.textTheme.headlineSmall,
                         ),
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 30, 16, 16),
-                  child: Text(
-                    "نوشته های مرتبط",
-                    style: Get.textTheme.headlineSmall,
-                  ),
-                ),
-                related(),
-              ],
-            ) : Center(child: loading()),
+                      ),
+                      related(),
+                    ],
+                  )
+                : SizedBox(height: Get.height,child: loading()),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget tags() {
+    return SizedBox(
+      height: 50,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: singleArticleController.tags.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () async {
+              await Get.find<ListArticleController>().getArticleListWithTagsId(
+                  singleArticleController.tags[index].id!);
+              Get.to(ArticleListScreen(title: singleArticleController.tags[index].title,));
+              
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 40,
+                width: 60,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Center(
+                    child: Text(singleArticleController.tags[index].title!)),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -209,7 +229,8 @@ class Single extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  singleArticleController.related[index].author!,
+                                  singleArticleController
+                                      .related[index].author!,
                                   style: Get.textTheme.labelSmall,
                                 ),
                                 Row(

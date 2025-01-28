@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/controller/home_screen_controller.dart';
+import 'package:tech/controller/list_article_controller.dart';
+import 'package:tech/controller/single_article_controller.dart';
+import 'package:tech/view/article_list_screen.dart';
 
 import '../../Models/fake_data.dart';
 import '../../components/my_colors.dart';
@@ -20,6 +23,10 @@ class HomeScreen extends StatelessWidget {
   final HomeScreenController homeScreenController =
       Get.put(HomeScreenController());
 
+  final SingleArticleController singleArticleController =
+      Get.put(SingleArticleController());
+  final ListArticleController listArticleController =
+      Get.put(ListArticleController());
   final Size size;
   final TextTheme textTheme;
   final double bodyMargin;
@@ -89,85 +96,93 @@ class HomeScreen extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: homeScreenController.topVisitedList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: SizedBox(
-                        height: size.height / 5.3,
-                        width: size.width / 2.4,
-                        child: Stack(children: [
-                          CachedNetworkImage(
-                            imageUrl: homeScreenController
-                                .topVisitedList[index].image!,
-                            placeholder: (context, url) => loading(),
-                            errorWidget: (context, url, error) => const Icon(
-                              Icons.image_not_supported,
-                              color: Colors.grey,
-                              size: 50,
-                            ),
-                            imageBuilder: (context, imageProvider) => Container(
-                              foregroundDecoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16)),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                      colors: GradiantColors.blogPost)),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: imageProvider, fit: BoxFit.cover),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(16),
+              return GestureDetector(
+                onTap: () {
+                  singleArticleController.getArticleInfo(
+                      homeScreenController.topVisitedList[index].id);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: SizedBox(
+                          height: size.height / 5.3,
+                          width: size.width / 2.4,
+                          child: Stack(children: [
+                            CachedNetworkImage(
+                              imageUrl: homeScreenController
+                                  .topVisitedList[index].image!,
+                              placeholder: (context, url) => loading(),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.image_not_supported,
+                                color: Colors.grey,
+                                size: 50,
+                              ),
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                foregroundDecoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(16)),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                        colors: GradiantColors.blogPost)),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(16),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            bottom: 8,
-                            right: 3,
-                            left: 0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  homeScreenController
-                                      .topVisitedList[index].author!,
-                                  style: textTheme.labelSmall,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      homeScreenController
-                                          .topVisitedList[index].view!,
-                                      style: textTheme.labelSmall,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    const Icon(
-                                      Icons.remove_red_eye_sharp,
-                                      color: Colors.white,
-                                      weight: 16,
-                                    )
-                                  ],
-                                )
-                              ],
+                            Positioned(
+                              bottom: 8,
+                              right: 3,
+                              left: 0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    homeScreenController
+                                        .topVisitedList[index].author!,
+                                    style: textTheme.labelSmall,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        homeScreenController
+                                            .topVisitedList[index].view!,
+                                        style: textTheme.labelSmall,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      const Icon(
+                                        Icons.remove_red_eye_sharp,
+                                        color: Colors.white,
+                                        weight: 16,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ]),
+                          ]),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                        width: size.width / 2.4,
-                        child: Text(
-                          homeScreenController.topVisitedList[index].title!,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        )),
-                  ],
+                      SizedBox(
+                          width: size.width / 2.4,
+                          child: Text(
+                            homeScreenController.topVisitedList[index].title!,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          )),
+                    ],
+                  ),
                 ),
               );
             }),
@@ -235,10 +250,19 @@ class HomeScreen extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: homeScreenController.tagsList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding:
-                    EdgeInsets.fromLTRB(0, 8, index == 0 ? bodyMargin : 15, 8),
-                child: MainTags(index: index, textTheme: textTheme),
+              return InkWell(
+                onTap: () {
+                   listArticleController.getArticleListWithTagsId(
+                      homeScreenController.tagsList[index].id!);
+
+                  Get.to(ArticleListScreen(
+                      title: homeScreenController.tagsList[index].title!));
+                },
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      0, 8, index == 0 ? bodyMargin : 15, 8),
+                  child: MainTags(index: index, textTheme: textTheme),
+                ),
               );
             }),
       ),
@@ -356,22 +380,27 @@ class SeeMore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: bodyMargin, bottom: 8),
-      child: Row(
-        children: [
-          ImageIcon(
-            Assets.icons.bluepen.provider(),
-            color: SolidColors.seeMore,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            MyStrings.viewHottestBlog,
-            style: textTheme.headlineSmall,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => ArticleListScreen());
+      },
+      child: Padding(
+        padding: EdgeInsets.only(right: bodyMargin, bottom: 8),
+        child: Row(
+          children: [
+            ImageIcon(
+              Assets.icons.bluepen.provider(),
+              color: SolidColors.seeMore,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              MyStrings.viewHottestBlog,
+              style: textTheme.headlineSmall,
+            ),
+          ],
+        ),
       ),
     );
   }

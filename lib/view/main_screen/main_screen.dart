@@ -7,6 +7,7 @@ import 'package:tech/components/strings.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:tech/view/article_list_screen.dart';
 import 'package:tech/view/main_screen/profile_screen.dart';
+import 'package:tech/view/register_intro.dart';
 
 import 'home_screen.dart';
 
@@ -173,7 +174,7 @@ class BottomNav extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Get.to(ArticleListScreen());
+                    Get.to(const RegisterIntro());
                   },
                   icon: ImageIcon(Assets.icons.write.provider()),
                   color: Colors.white,

@@ -7,14 +7,25 @@ import 'package:tech/services/dio_service.dart';
 class ListArticleController extends GetxController {
   RxList<ArticleModel> articleList = RxList();
 
-  
-
   // TODO GET USER ID FROM GETSTORAGE APICONSTANTS.GETARTICLELIST + USERID
   RxBool loading = false.obs;
 
   Future<dynamic> getList() async {
     loading.value = true;
     var response = await DioService().getMethod(ApiConstants.getArticleList);
+    if (response.statusCode == 200) {
+      response.data.forEach((element) {
+        articleList.add(ArticleModel.fromJson(element));
+        loading.value = false;
+      });
+    }
+  }
+
+  Future<dynamic> getArticleListWithTagsId(String id) async {
+    articleList.clear();
+    loading.value = true;
+    var response = await DioService().getMethod(
+        "${ApiConstants.baseUrl}article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=1");
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));

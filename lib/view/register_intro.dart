@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:tech/view/my_cats.dart';
 
 import '../gen/assets.gen.dart';
@@ -129,9 +131,7 @@ class _RegisterIntroState extends State<RegisterIntro> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (builder) => const MyCats()));
+                          Get.to( () => MyCats() );
                         },
                         child: const Text(
                           "ادامه",

@@ -7,11 +7,13 @@ import 'package:tech/controller/single_article_controller.dart';
 import 'package:tech/view/single.dart';
 
 class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key});
+  ArticleListScreen({super.key, this.title = "مقالات جدید"});
 
   final ListArticleController listArticleController =
       Get.put(ListArticleController());
-SingleArticleController singleArticleController = Get.put(SingleArticleController());
+  SingleArticleController singleArticleController =
+      Get.put(SingleArticleController());
+  String? title;
   @override
   Widget build(BuildContext context) {
     var size = Get.size;
@@ -20,7 +22,7 @@ SingleArticleController singleArticleController = Get.put(SingleArticleControlle
     listArticleController.getList();
     return SafeArea(
         child: Scaffold(
-            appBar: appBar('مقالات جدید', context),
+            appBar: appBar(title!, context),
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -33,8 +35,8 @@ SingleArticleController singleArticleController = Get.put(SingleArticleControlle
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
                             onTap: () {
-                              singleArticleController.id.value = listArticleController.articleList[index].id!;
-                              Get.to(Single());
+                              singleArticleController.getArticleInfo(
+                                  listArticleController.articleList[index].id);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -109,5 +111,4 @@ SingleArticleController singleArticleController = Get.put(SingleArticleControlle
               ),
             )));
   }
-  
 }

@@ -21,6 +21,7 @@ class HomeScreenController extends GetxController {
   }
 
   getHomeItems() async {
+    
     loading.value = true;
     var response = await DioService().getMethod(ApiConstants.getHomeItems);
     if (response.statusCode == 200) {

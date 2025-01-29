@@ -4,10 +4,9 @@ import 'package:share_plus/share_plus.dart';
 import 'package:tech/components/my_colors.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/components/strings.dart';
+import 'package:tech/controller/register_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
-import 'package:tech/view/article_list_screen.dart';
 import 'package:tech/view/main_screen/profile_screen.dart';
-import 'package:tech/view/register_intro.dart';
 
 import 'home_screen.dart';
 
@@ -130,7 +129,7 @@ class MainScreen extends StatelessWidget {
 }
 
 class BottomNav extends StatelessWidget {
-  const BottomNav({
+  BottomNav({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -174,7 +173,7 @@ class BottomNav extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Get.to(const RegisterIntro());
+                    Get.find<RegisterController>().toggleLogin();
                   },
                   icon: ImageIcon(Assets.icons.write.provider()),
                   color: Colors.white,

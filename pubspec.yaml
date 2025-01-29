@@ -47,6 +47,7 @@ dependencies:
   dio: ^5.7.0
   cached_network_image: ^3.4.1
   flutter_widget_from_html: ^0.15.3
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -104,9 +105,12 @@ flutter:
     - assets/icons/hashtagicon.png
     - assets/icons/home.png
     - assets/icons/techbot.svg
+    - assets/icons/emptytcbot.svg
     - assets/icons/user.png
     - assets/icons/write.png
     - assets/icons/down_cat_arrow.png
+    - assets/icons/write_article.png
+    - assets/icons/write_podcast.png
     - assets/images/avatar.png
     - assets/images/icon.png
     - assets/images/logo.png

@@ -1,11 +1,15 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tech/Models/article_info_model.dart';
 import 'package:tech/Models/article_model.dart';
 import 'package:tech/Models/tags_model.dart';
 import 'package:tech/components/api_constants.dart';
+import 'package:tech/components/storage_const.dart';
+import 'package:tech/main.dart';
 import 'package:tech/services/dio_service.dart';
-
-import '../view/single.dart';
+import 'package:tech/view/register/register_intro.dart';
+import 'dart:developer' as developer;
+import '../../view/article/single.dart' ;
 
 class SingleArticleController extends GetxController {
   RxBool loading = false.obs;
@@ -37,7 +41,10 @@ tags.clear();
 
       loading.value = false;
     }
-      Get.to(Single());
+      Get.toNamed(NamedRoute.routeSingleArticle);
 
   }
+
+
+
 }

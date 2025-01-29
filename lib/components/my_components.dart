@@ -28,7 +28,7 @@ class TechDivider extends StatelessWidget {
 }
 
 class MainTags extends StatelessWidget {
-  MainTags({
+  const MainTags({
     super.key,
     required this.index,
     required this.textTheme,

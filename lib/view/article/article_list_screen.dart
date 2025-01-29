@@ -2,9 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech/components/my_components.dart';
-import 'package:tech/controller/list_article_controller.dart';
-import 'package:tech/controller/single_article_controller.dart';
-import 'package:tech/view/single.dart';
+import 'package:tech/controller/article/list_article_controller.dart';
+import 'package:tech/controller/article/single_article_controller.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key, this.title = "مقالات جدید"});

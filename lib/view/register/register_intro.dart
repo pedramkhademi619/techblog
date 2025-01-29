@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:tech/view/my_cats.dart';
+import 'package:tech/controller/register_controller.dart';
 
-import '../gen/assets.gen.dart';
-import '../components/strings.dart';
+import '../../gen/assets.gen.dart';
+import '../../components/strings.dart';
 import 'package:validators/validators.dart';
 
-class RegisterIntro extends StatefulWidget {
-  const RegisterIntro({super.key});
+class RegisterIntro extends StatelessWidget {
+  RegisterIntro({super.key});
+  var registerController = Get.find<RegisterController>();
 
-  @override
-  State<RegisterIntro> createState() => _RegisterIntroState();
-}
-
-class _RegisterIntroState extends State<RegisterIntro> {
   @override
   Widget build(BuildContext context) {
     var texttheme = Theme.of(context).textTheme;
@@ -73,6 +68,8 @@ class _RegisterIntroState extends State<RegisterIntro> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextField(
+                        controller:
+                            registerController.emailTextEditingController,
                         onChanged: (value) {
                           isEmail(value);
                         },
@@ -84,8 +81,10 @@ class _RegisterIntroState extends State<RegisterIntro> {
                       ),
                     ),
                     ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
+                        onPressed: () async {
+                          registerController.register();
+
+                          Get.back();
                           _activateCodeBottomSheet(context, size, texttheme);
                         },
                         child: const Text(
@@ -119,9 +118,9 @@ class _RegisterIntroState extends State<RegisterIntro> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextField(
-                        onChanged: (value) {
-                          isEmail(value);
-                        },
+                        controller: registerController
+                            .activateCodeTextEditingController,
+                        onChanged: (value) {},
                         style: texttheme.titleMedium,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
@@ -131,7 +130,7 @@ class _RegisterIntroState extends State<RegisterIntro> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Get.to( () => MyCats() );
+                          registerController.verify();
                         },
                         child: const Text(
                           "ادامه",

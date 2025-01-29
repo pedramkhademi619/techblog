@@ -5,16 +5,16 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:tech/components/my_colors.dart';
 import 'package:tech/components/my_components.dart';
-import 'package:tech/controller/list_article_controller.dart';
-import 'package:tech/controller/single_article_controller.dart';
+import 'package:tech/controller/article/list_article_controller.dart';
+import 'package:tech/controller/article/single_article_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
-import 'package:tech/view/article_list_screen.dart';
+import 'package:tech/view/article/article_list_screen.dart';
 
 
 
 class Single extends StatelessWidget {
-  SingleArticleController singleArticleController =
-      Get.put(SingleArticleController());
+  var singleArticleController =
+      Get.find<SingleArticleController>();
 
   Single({super.key});
 

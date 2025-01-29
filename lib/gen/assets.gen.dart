@@ -25,6 +25,10 @@ class $AssetsIconsGen {
   AssetGenImage get downCatArrow =>
       const AssetGenImage('assets/icons/down_cat_arrow.png');
 
+  /// File path: assets/icons/emptytcbot.svg
+  SvgGenImage get emptytcbot =>
+      const SvgGenImage('assets/icons/emptytcbot.svg');
+
   /// File path: assets/icons/hashtagicon.png
   AssetGenImage get hashtagicon =>
       const AssetGenImage('assets/icons/hashtagicon.png');
@@ -41,9 +45,28 @@ class $AssetsIconsGen {
   /// File path: assets/icons/write.png
   AssetGenImage get write => const AssetGenImage('assets/icons/write.png');
 
+  /// File path: assets/icons/write_article.png
+  AssetGenImage get writeArticle =>
+      const AssetGenImage('assets/icons/write_article.png');
+
+  /// File path: assets/icons/write_podcast.png
+  AssetGenImage get writePodcast =>
+      const AssetGenImage('assets/icons/write_podcast.png');
+
   /// List of all assets
-  List<dynamic> get values =>
-      [bluemic, bluepen, downCatArrow, hashtagicon, home, techbot, user, write];
+  List<dynamic> get values => [
+        bluemic,
+        bluepen,
+        downCatArrow,
+        emptytcbot,
+        hashtagicon,
+        home,
+        techbot,
+        user,
+        write,
+        writeArticle,
+        writePodcast
+      ];
 }
 
 class $AssetsImagesGen {

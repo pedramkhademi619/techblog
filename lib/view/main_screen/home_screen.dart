@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/controller/home_screen_controller.dart';
-import 'package:tech/controller/list_article_controller.dart';
-import 'package:tech/controller/single_article_controller.dart';
-import 'package:tech/view/article_list_screen.dart';
+import 'package:tech/controller/article/list_article_controller.dart';
+import 'package:tech/controller/article/single_article_controller.dart';
+import 'package:tech/view/article/article_list_screen.dart';
 
 import '../../Models/fake_data.dart';
 import '../../components/my_colors.dart';

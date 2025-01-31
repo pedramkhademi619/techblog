@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech/binding.dart';
 import 'package:tech/components/my_colors.dart';
-import 'package:tech/controller/article/manage_article_controller.dart';
 import 'package:tech/my_http_overrides.dart';
+import 'package:tech/view/article/single_manage_article.dart';
 import 'package:tech/view/main_screen/main_screen.dart';
 import 'package:tech/view/article/manage_article.dart';
 import 'package:tech/view/article/single.dart';
@@ -49,12 +49,16 @@ class _HomePage extends State<HomePage> {
               name: NamedRoute.manageArticle,
               page: () => ManageArticle(),
               binding: ArticleManagerBinding()),
+          GetPage(
+              name: NamedRoute.singleManageArticle,
+              page: () => SingleManageArticle(),
+              binding: ArticleManagerBinding()),
         ],
         initialBinding: RegisterBinding(),
         locale: const Locale("fa"),
         theme: lightTheme(context),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+        home: SplashScreen());
   }
 
   ThemeData lightTheme(BuildContext context) {
@@ -67,20 +71,27 @@ class _HomePage extends State<HomePage> {
             )),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  const RoundedRectangleBorder()),
               backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.pressed)) {
-              return SolidColors.seeMore;
-            }
-            return SolidColors.primaryColor;
-          }), textStyle: WidgetStateProperty.resolveWith(
-            (states) {
-              if (states.contains(WidgetState.pressed)) {
-                return Theme.of(context).textTheme.headlineLarge;
-              }
-              return Theme.of(context).textTheme.labelSmall;
-            },
-          )),
+                if (states.contains(WidgetState.pressed)) {
+                  return SolidColors.seeMore;
+                }
+                return SolidColors.primaryColor;
+              }),
+              textStyle: WidgetStateProperty.resolveWith(
+                (states) {
+                  if (states.contains(WidgetState.pressed)) {
+                    return Theme.of(context).textTheme.headlineLarge;
+                  }
+                  return Theme.of(context).textTheme.labelSmall!.copyWith(
+                        fontFamily: 'dana',
+                        color: SolidColors.posterSubTitle,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                      );
+                },
+              )),
         ),
         fontFamily: 'dana',
         textTheme: TextTheme(
@@ -140,4 +151,5 @@ class NamedRoute {
   static const String routeMainScreen = "/MainScreen";
   static const String routeSingleArticle = "/SingleArticle";
   static const String manageArticle = "/ManageArticle";
+  static const String singleManageArticle = "/SingleManageArticle";
 }

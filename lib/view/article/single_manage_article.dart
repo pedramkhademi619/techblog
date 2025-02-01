@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
-import 'package:tech/components/my_colors.dart';
+import 'package:tech/components/constants/my_colors.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/controller/article/list_article_controller.dart';
 import 'package:tech/controller/article/manage_article_controller.dart';
@@ -28,7 +28,6 @@ class SingleManageArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RxBool select = false.obs;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -68,20 +67,8 @@ class SingleManageArticle extends StatelessWidget {
                               onPressed: () => Get.back(),
                             ),
                             const Expanded(child: SizedBox()),
-                            IconButton(
-                              onPressed: () {
-                                select.value = !select.value;
-                              },
-                              icon: Icon(
-                                  select.value == false
-                                      ? Icons.bookmark_add_outlined
-                                      : Icons.bookmark_remove,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(
-                              width: 32,
-                            ),
-                            const Icon(Icons.share, color: Colors.white),
+                           
+                            
                           ],
                         ),
                       ),
@@ -96,14 +83,24 @@ class SingleManageArticle extends StatelessWidget {
                               imagePicker();
                             },
                             child: Container(
-                              height: 40,
-                              width: 100,
+                              height: 30,
+                              width: Get.width / 3,
                               decoration: const BoxDecoration(
                                   color: SolidColors.primaryColor,
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(8),
                                     topRight: Radius.circular(8),
                                   )),
+                              child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "انتخاب تصویر",
+                                    style: Get.textTheme.headlineMedium,
+                                  ),
+                                  const Icon(Icons.add, color: Colors.white,)
+
+                                ],
+                              ),
                             ),
                           ),
                         ))
@@ -118,7 +115,10 @@ class SingleManageArticle extends StatelessWidget {
                       maxLines: 2,
                     ),
                   ),
-                  file.value == "nothing"?SizedBox.shrink(): Image.file(File(file.value)),
+                  SeeMoreBlog(bodyMargin: Get.width/10, textTheme: Get.textTheme, title: "ویرایش عنوان مقاله"),
+                  file.value == "nothing"
+                      ? SizedBox.shrink()
+                      : Image.file(File(file.value)),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(0, 16, 16, 16),
                     child: Row(

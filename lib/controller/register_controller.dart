@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tech/components/api_constants.dart';
+import 'package:tech/components/constants/api_constants.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:tech/main.dart';
 import 'package:tech/services/dio_service.dart';
 import 'dart:developer' as developer;
-import 'package:tech/components/storage_const.dart';
+import 'package:tech/components/constants/storage_const.dart';
 import 'package:tech/view/main_screen/main_screen.dart';
 import 'package:tech/view/register/register_intro.dart';
 

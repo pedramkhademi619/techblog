@@ -1,4 +1,4 @@
-import 'package:tech/components/api_constants.dart';
+import 'package:tech/components/constants/api_constants.dart';
 
 class ArticleInfoModel {
   String? id;

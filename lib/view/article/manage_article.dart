@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tech/components/my_components.dart';
-import 'package:tech/components/strings.dart';
+import 'package:tech/components/constants/strings.dart';
 import 'package:tech/controller/article/manage_article_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:tech/main.dart';

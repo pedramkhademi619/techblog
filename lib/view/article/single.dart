@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
-import 'package:tech/components/my_colors.dart';
+import 'package:tech/components/constants/my_colors.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/controller/article/list_article_controller.dart';
 import 'package:tech/controller/article/single_article_controller.dart';

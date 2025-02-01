@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/route_manager.dart';
-import 'package:tech/components/my_colors.dart';
+import 'package:tech/components/constants/my_colors.dart';
 import 'package:tech/main.dart';
 import '../gen/assets.gen.dart';
 

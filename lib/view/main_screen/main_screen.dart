@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tech/components/my_colors.dart';
+import 'package:tech/components/constants/dimens.dart';
+import 'package:tech/components/constants/my_colors.dart';
 import 'package:tech/components/my_components.dart';
-import 'package:tech/components/strings.dart';
+import 'package:tech/components/constants/strings.dart';
 import 'package:tech/controller/register_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:tech/view/main_screen/profile_screen.dart';
@@ -18,17 +19,13 @@ class MainScreen extends StatelessWidget {
   MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
-    var textTheme = Theme.of(context).textTheme;
-
     return SafeArea(
       child: Scaffold(
         key: key,
         drawer: Drawer(
           backgroundColor: SolidColors.scaffoldBg,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+            padding: EdgeInsets.symmetric(horizontal: Dimens.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -37,7 +34,7 @@ class MainScreen extends StatelessWidget {
                 ListTile(
                   title: Text(
                     "پروفایل کاربری",
-                    style: textTheme.titleSmall,
+                    style: Get.textTheme.titleSmall,
                   ),
                   onTap: () {},
                 ),
@@ -47,7 +44,7 @@ class MainScreen extends StatelessWidget {
                 ListTile(
                   title: Text(
                     "درباره تک بلاگ",
-                    style: textTheme.titleSmall,
+                    style: Get.textTheme.titleSmall,
                   ),
                   onTap: () {},
                 ),
@@ -57,7 +54,7 @@ class MainScreen extends StatelessWidget {
                 ListTile(
                   title: Text(
                     "اشتراک گذاری تک بلاگ",
-                    style: textTheme.titleSmall,
+                    style: Get.textTheme.titleSmall,
                   ),
                   onTap: () async {
                     await Share.share(MyStrings.shareText);
@@ -69,7 +66,7 @@ class MainScreen extends StatelessWidget {
                 ListTile(
                   title: Text(
                     "تک بلاگ در گیت هاب",
-                    style: textTheme.titleSmall,
+                    style: Get.textTheme.titleSmall,
                   ),
                   onTap: () {
                     myLaunchUrl(MyStrings.techBlogGitHubUrl);
@@ -95,7 +92,7 @@ class MainScreen extends StatelessWidget {
               ),
               Image(
                 image: Assets.images.logo.provider(),
-                height: size.height / 13.6,
+                height: Get.size.height / 13.6,
               ),
               const Icon(Icons.search),
             ],
@@ -108,15 +105,18 @@ class MainScreen extends StatelessWidget {
                 index: selectedPageIndex.value,
                 children: [
                   HomeScreen(
-                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                      size: Get.size,
+                      textTheme: Get.textTheme,
+                      bodyMargin: Dimens.bodyMargin),
                   ProfileScreen(
-                      size: size, textTheme: textTheme, bodyMargin: bodyMargin)
+                      size: Get.size,
+                      textTheme: Get.textTheme,
+                      bodyMargin: Dimens.bodyMargin)
                 ],
               );
             })),
             BottomNav(
-              size: size,
-              bodyMargin: bodyMargin,
+              bodyMargin: Dimens.bodyMargin,
               changeScreen: (int pageIndex) {
                 selectedPageIndex.value = pageIndex;
               },
@@ -129,14 +129,12 @@ class MainScreen extends StatelessWidget {
 }
 
 class BottomNav extends StatelessWidget {
-  BottomNav({
+  const BottomNav({
     super.key,
-    required this.size,
     required this.bodyMargin,
     required this.changeScreen,
   });
 
-  final Size size;
   final double bodyMargin;
   final Function(int) changeScreen;
 
@@ -147,7 +145,7 @@ class BottomNav extends StatelessWidget {
       bottom: 0,
       left: 0,
       child: Container(
-        height: size.height / 10,
+        height: Get.size.height / 10,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
                 colors: GradiantColors.bottomNavBackGround,
@@ -156,7 +154,7 @@ class BottomNav extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin),
           child: Container(
-            height: size.height / 8,
+            height: Get.size.height / 8,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(36)),
               gradient: LinearGradient(

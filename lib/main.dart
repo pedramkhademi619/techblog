@@ -5,8 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech/binding.dart';
-import 'package:tech/components/my_colors.dart';
+import 'package:tech/components/constants/my_colors.dart';
 import 'package:tech/my_http_overrides.dart';
+import 'package:tech/view/article/article_list_screen.dart';
 import 'package:tech/view/article/single_manage_article.dart';
 import 'package:tech/view/main_screen/main_screen.dart';
 import 'package:tech/view/article/manage_article.dart';
@@ -44,6 +45,10 @@ class _HomePage extends State<HomePage> {
           GetPage(
               name: NamedRoute.routeSingleArticle,
               page: () => Single(),
+              binding: ArticleBinding()),
+          GetPage(
+              name: NamedRoute.routeListArticle,
+              page: () => ArticleListScreen(),
               binding: ArticleBinding()),
           GetPage(
               name: NamedRoute.manageArticle,
@@ -107,7 +112,7 @@ class _HomePage extends State<HomePage> {
               fontFamily: 'dana',
               color: SolidColors.posterSubTitle,
               fontSize: 14,
-              fontWeight: FontWeight.w300,
+              fontWeight: FontWeight.w700,
             ),
             //headline3
             headlineSmall: const TextStyle().copyWith(
@@ -150,6 +155,7 @@ class _HomePage extends State<HomePage> {
 class NamedRoute {
   static const String routeMainScreen = "/MainScreen";
   static const String routeSingleArticle = "/SingleArticle";
+  static const String routeListArticle = "/ArticleList";
   static const String manageArticle = "/ManageArticle";
   static const String singleManageArticle = "/SingleManageArticle";
 }

@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:tech/components/constants/strings.dart';
 import 'package:tech/controller/home_screen_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'my_colors.dart';
+import 'constants/my_colors.dart';
 
 class TechDivider extends StatelessWidget {
   const TechDivider({
@@ -121,4 +122,39 @@ PreferredSize appBar(String title, context) {
       ),
     ),
   );
+}
+
+class SeeMoreBlog extends StatelessWidget {
+  const SeeMoreBlog({
+    super.key,
+    required this.bodyMargin,
+    required this.textTheme,
+    required this.title,
+  });
+
+  final double bodyMargin;
+  final TextTheme textTheme;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: bodyMargin, bottom: 8),
+      child: Row(
+        children: [
+          ImageIcon(
+            Assets.icons.bluepen.provider(),
+            color: SolidColors.seeMore,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            title,
+            style: textTheme.headlineSmall,
+          ),
+        ],
+      ),
+    );
+  }
 }

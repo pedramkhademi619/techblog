@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:tech/Models/article_info_model.dart';
 import 'package:tech/Models/article_model.dart';
 import 'package:tech/Models/tags_model.dart';
-import 'package:tech/components/api_constants.dart';
+import 'package:tech/components/constants/api_constants.dart';
 import 'package:tech/main.dart';
 import 'package:tech/services/dio_service.dart';
 

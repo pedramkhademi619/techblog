@@ -5,11 +5,12 @@ import 'package:tech/components/my_components.dart';
 import 'package:tech/controller/home_screen_controller.dart';
 import 'package:tech/controller/article/list_article_controller.dart';
 import 'package:tech/controller/article/single_article_controller.dart';
+import 'package:tech/main.dart';
 import 'package:tech/view/article/article_list_screen.dart';
 
 import '../../Models/fake_data.dart';
-import '../../components/my_colors.dart';
-import '../../components/strings.dart';
+import '../../components/constants/my_colors.dart';
+import '../../components/constants/strings.dart';
 import '../../gen/assets.gen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,7 +54,15 @@ class HomeScreen extends StatelessWidget {
                   ),
 
                   //see more
-                  SeeMore(bodyMargin: bodyMargin, textTheme: textTheme),
+                  GestureDetector(onTap: (){
+                    Get.toNamed(NamedRoute.routeListArticle);
+                  },
+                    child: SeeMoreBlog(
+                      bodyMargin: bodyMargin,
+                      textTheme: textTheme,
+                      title: MyStrings.viewHottestBlog,
+                    ),
+                  ),
 
                   //blog list
                   topVisited(),
@@ -252,7 +261,7 @@ class HomeScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                   listArticleController.getArticleListWithTagsId(
+                  listArticleController.getArticleListWithTagsId(
                       homeScreenController.tagsList[index].id!);
 
                   Get.to(ArticleListScreen(
@@ -364,44 +373,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class SeeMore extends StatelessWidget {
-  const SeeMore({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.to(() => ArticleListScreen());
-      },
-      child: Padding(
-        padding: EdgeInsets.only(right: bodyMargin, bottom: 8),
-        child: Row(
-          children: [
-            ImageIcon(
-              Assets.icons.bluepen.provider(),
-              color: SolidColors.seeMore,
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(
-              MyStrings.viewHottestBlog,
-              style: textTheme.headlineSmall,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

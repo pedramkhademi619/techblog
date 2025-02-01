@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:tech/controller/register_controller.dart';
 
 import '../../gen/assets.gen.dart';
-import '../../components/strings.dart';
+import '../../components/constants/strings.dart';
 import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
@@ -118,12 +118,14 @@ class RegisterIntro extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextField(
+                        keyboardType: TextInputType.number,
                         controller: registerController
                             .activateCodeTextEditingController,
                         onChanged: (value) {},
                         style: texttheme.titleMedium,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
+                          
                             hintText: "******",
                             hintStyle: texttheme.titleMedium),
                       ),

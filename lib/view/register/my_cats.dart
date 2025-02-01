@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tech/Models/fake_data.dart';
 import 'package:tech/gen/assets.gen.dart';
-import 'package:tech/components/my_colors.dart';
+import 'package:tech/components/constants/my_colors.dart';
 import 'package:tech/components/my_components.dart';
-import 'package:tech/components/strings.dart';
+import 'package:tech/components/constants/strings.dart';
 import 'package:tech/view/main_screen/main_screen.dart';
 
 class MyCats extends StatefulWidget {

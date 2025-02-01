@@ -1,7 +1,7 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:tech/Models/article_model.dart';
-import 'package:tech/components/api_constants.dart';
+import 'package:tech/components/constants/api_constants.dart';
 import 'package:tech/services/dio_service.dart';
 
 class ListArticleController extends GetxController {

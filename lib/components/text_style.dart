@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:tech/components/my_colors.dart';
+import 'package:tech/components/constants/my_colors.dart';
 
 final appBarTextStyle = TextStyle(
     fontFamily: 'dana',

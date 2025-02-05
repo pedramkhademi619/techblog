@@ -63,7 +63,7 @@ class _HomePage extends State<HomePage> {
         locale: const Locale("fa"),
         theme: lightTheme(context),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen());
+        home: const SplashScreen());
   }
 
   ThemeData lightTheme(BuildContext context) {
@@ -118,7 +118,7 @@ class _HomePage extends State<HomePage> {
             headlineSmall: const TextStyle().copyWith(
               fontFamily: 'dana',
               color: SolidColors.seeMore,
-              fontSize: 14,
+              fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
             //headline4

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech/Models/article_info_model.dart';
 import 'package:tech/Models/article_model.dart';
@@ -17,6 +18,7 @@ class ManageArticleController extends GetxController {
       .obs;
   RxList<TagsModel> tagList = RxList.empty();
   RxBool loading = false.obs;
+  TextEditingController titleTextEditingController = TextEditingController();
   @override
   onInit() {
     super.onInit();
@@ -28,9 +30,6 @@ class ManageArticleController extends GetxController {
     loading.value = true;
     articleList.clear();
 
-    //TODO
-    // var userId = await GetStorage().read("user_id");
-    // developer.log(userId.toString());
     var response =
         await DioService().getMethod("${ApiConstants.publishedByMe}2");
 
@@ -42,5 +41,11 @@ class ManageArticleController extends GetxController {
       loading.value = false;
     }
     // articleList.clear();
+  }
+
+  updateTitle() {
+    articleInfoModel.update((val) {
+      val!.title = titleTextEditingController.text;
+    });
   }
 }

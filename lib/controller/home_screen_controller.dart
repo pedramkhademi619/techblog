@@ -31,6 +31,7 @@ class HomeScreenController extends GetxController {
           topPodcastList.add(PodCastModel.fromJson(element));
         });
       });
+      tagsList.clear();
       response.data["tags"].forEach((element) {
         tagsList.add(TagsModel.fromJson(element));
       });

@@ -11,8 +11,10 @@ import 'package:tech/components/my_components.dart';
 import 'package:tech/controller/article/list_article_controller.dart';
 import 'package:tech/controller/article/manage_article_controller.dart';
 import 'package:tech/controller/file_controller.dart';
+import 'package:tech/controller/home_screen_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:tech/services/pick_file.dart';
+import 'package:tech/view/article/article_content_editor.dart';
 import 'package:tech/view/article/article_list_screen.dart';
 
 class SingleManageArticle extends StatelessWidget {
@@ -159,10 +161,13 @@ class SingleManageArticle extends StatelessWidget {
                       maxLines: 2,
                     ),
                   ),
-                  SeeMoreBlog(
-                      bodyMargin: Dimens.halfBodyMargin,
-                      textTheme: Get.textTheme,
-                      title: "ویرایش متن اصلی مقاله"),
+                  GestureDetector(
+                    onTap: () => Get.to(() => ArticleContentEditor()),
+                    child: SeeMoreBlog(
+                        bodyMargin: Dimens.halfBodyMargin,
+                        textTheme: Get.textTheme,
+                        title: "ویرایش متن اصلی مقاله"),
+                  ),
 
                   Padding(
                     padding: const EdgeInsets.all(16),
@@ -172,14 +177,30 @@ class SingleManageArticle extends StatelessWidget {
                       textStyle: Get.textTheme.titleMedium,
                     ),
                   ),
-                  SeeMoreBlog(
-                      bodyMargin: Dimens.halfBodyMargin,
-                      textTheme: Get.textTheme,
-                      title: "انتخاب دسته بندی"),
+                  GestureDetector(
+                    onTap: () {
+                      chooseCatsBottomSheet(Get.textTheme);
+                    },
+                    child: SeeMoreBlog(
+                        bodyMargin: Dimens.halfBodyMargin,
+                        textTheme: Get.textTheme,
+                        title: "انتخاب دسته بندی"),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
-                  // tags(),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                    child: Text(
+                      manageArticleController.articleInfoModel.value.catName ??
+                          "هیچ دسته بندی انتخاب نشده!",
+                      style: Get.textTheme.headlineLarge!
+                          .copyWith(color: Colors.black),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ),
+                  // cats(),
                 ],
               )),
         ),
@@ -187,37 +208,73 @@ class SingleManageArticle extends StatelessWidget {
     );
   }
 
-  Widget tags() {
+  Widget cats() {
+    HomeScreenController homeScreenController =
+        Get.find<HomeScreenController>();
     return SizedBox(
-      height: 50,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: manageArticleController.tagList.length,
+      height: Get.height / 1.7,
+      child: GridView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: homeScreenController.tagsList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () async {
-              await Get.find<ListArticleController>().getArticleListWithTagsId(
-                  manageArticleController.tagList[index].id!);
-              Get.to(ArticleListScreen(
-                title: manageArticleController.tagList[index].title,
-              ));
+              manageArticleController.articleInfoModel.update((value) {
+                value!.catName = homeScreenController.tagsList[index].title!;
+                value.catId = homeScreenController.tagsList[index].id!;
+              });
+              Get.back();
             },
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 8.0),
               child: Container(
-                height: 40,
+                height: 30,
                 width: 60,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: SolidColors.primaryColor,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Center(
-                    child: Text(manageArticleController.tagList[index].title!)),
+                    child: Text(
+                  homeScreenController.tagsList[index].title!,
+                  style: Get.textTheme.headlineMedium,
+                )),
               ),
             ),
           );
         },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+        ),
       ),
     );
+  }
+
+  void chooseCatsBottomSheet(TextTheme textTheme) {
+    Get.bottomSheet(
+        isScrollControlled: true,
+        persistent: true,
+        Container(
+          height: Get.height / 1.5,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(12), topRight: Radius.circular(12))),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const Text("انتخاب دسته بندی"),
+                const SizedBox(
+                  height: 8,
+                ),
+                cats(),
+              ],
+            ),
+          ),
+        ));
   }
 }

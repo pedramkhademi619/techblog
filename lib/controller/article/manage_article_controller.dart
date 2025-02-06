@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tech/Models/article_info_model.dart';
 import 'package:tech/Models/article_model.dart';
 import 'package:tech/Models/tags_model.dart';
 import 'package:tech/components/constants/api_constants.dart';
+import 'package:tech/components/constants/storage_const.dart';
 import 'package:tech/services/dio_service.dart';
 import 'dart:developer' as developer;
 
@@ -30,8 +32,8 @@ class ManageArticleController extends GetxController {
     loading.value = true;
     articleList.clear();
 
-    var response =
-        await DioService().getMethod("${ApiConstants.publishedByMe}2");
+    var response = await DioService().getMethod(
+        "${ApiConstants.publishedByMe}${GetStorage().read(StorageKey.userId)}");
 
     developer.log(response.toString());
     if (response.statusCode == 200) {
@@ -40,7 +42,6 @@ class ManageArticleController extends GetxController {
       });
       loading.value = false;
     }
-    // articleList.clear();
   }
 
   updateTitle() {

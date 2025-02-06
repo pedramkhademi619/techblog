@@ -42,7 +42,7 @@ class ManageArticle extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
-                            //TODO route single manage
+                            // Get.toNamed(NamedRoute.singleManageArticle);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,

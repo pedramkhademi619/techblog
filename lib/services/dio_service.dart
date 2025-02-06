@@ -13,8 +13,7 @@ class DioService {
         .then((response) {
       return response;
     }).catchError((err){
-      // TODO Remove depricate
-       if (err is DioError){
+       if (err is DioException){
         return err.response!;
        }
     });

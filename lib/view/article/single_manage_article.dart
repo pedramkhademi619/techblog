@@ -8,14 +8,12 @@ import 'package:get/get.dart';
 import 'package:tech/components/constants/dimens.dart';
 import 'package:tech/components/constants/my_colors.dart';
 import 'package:tech/components/my_components.dart';
-import 'package:tech/controller/article/list_article_controller.dart';
 import 'package:tech/controller/article/manage_article_controller.dart';
 import 'package:tech/controller/file_controller.dart';
 import 'package:tech/controller/home_screen_controller.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:tech/services/pick_file.dart';
 import 'package:tech/view/article/article_content_editor.dart';
-import 'package:tech/view/article/article_list_screen.dart';
 
 class SingleManageArticle extends StatelessWidget {
   SingleManageArticle({super.key});
@@ -168,7 +166,6 @@ class SingleManageArticle extends StatelessWidget {
                         textTheme: Get.textTheme,
                         title: "ویرایش متن اصلی مقاله"),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: HtmlWidget(
@@ -200,7 +197,20 @@ class SingleManageArticle extends StatelessWidget {
                       maxLines: 2,
                     ),
                   ),
-                  // cats(),
+                  Center(
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            await manageArticleController.storeArticle();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              manageArticleController.loading.value
+                                  ? "صبر کنید..."
+                                  : "ارسال مطلب",
+                              style: Get.textTheme.headlineMedium,
+                            ),
+                          ))),
                 ],
               )),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech/components/constants/api_constants.dart';
+import 'package:tech/components/constants/commands.dart';
 import 'package:tech/gen/assets.gen.dart';
 import 'package:tech/main.dart';
 import 'package:tech/services/dio_service.dart';
@@ -20,26 +21,25 @@ class RegisterController extends GetxController {
   register() async {
     Map<String, dynamic> map = {
       'email': emailTextEditingController.text,
-      "command": "register"
+      "command": Commands.register
     };
     var response =
-        await DioService().postMethod(map, ApiConstants.postRegister);
+        await DioService().postMethod(map, ApiUrlConstants.postRegister);
     email = emailTextEditingController.text;
-    userId = response.data["user_id"];
+    userId = response.data[ApiArticleKeyConstants.userId];
     developer.log(response.data.toString(), name: "register_response");
   }
 
   verify() async {
     Map<String, dynamic> map = {
-      'email': email,
-      // 'email': emailTextEditingController.text,
-      "command": "verify",
-      "user_id": userId,
-      "code": activateCodeTextEditingController.text
+      ApiArticleKeyConstants.email: email,
+      ApiArticleKeyConstants.command: Commands.verify,
+      ApiArticleKeyConstants.userId: userId,
+      ApiArticleKeyConstants.code: activateCodeTextEditingController.text
     };
     developer.log(map.toString(), name: "map");
     var response =
-        await DioService().postMethod(map, ApiConstants.postRegister);
+        await DioService().postMethod(map, ApiUrlConstants.postRegister);
     developer.log(response.toString(), name: "response");
     var status = response.data["response"];
 

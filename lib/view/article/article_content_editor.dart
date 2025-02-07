@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:tech/controller/article/manage_article_controller.dart';
-import 'package:validators/validators.dart';
 import 'dart:developer' as developer;
 import '../../components/my_components.dart';
 

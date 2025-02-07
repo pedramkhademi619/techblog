@@ -12,12 +12,13 @@ class ListArticleController extends GetxController {
 
   Future<dynamic> getList() async {
     loading.value = true;
-    var response = await DioService().getMethod(ApiConstants.getArticleList);
+    var response = await DioService().getMethod(ApiUrlConstants.getArticleList);
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));
-        loading.value = false;
+        
       });
+      loading.value = false;
     }
   }
 
@@ -25,12 +26,14 @@ class ListArticleController extends GetxController {
     articleList.clear();
     loading.value = true;
     var response = await DioService().getMethod(
-        "${ApiConstants.baseUrl}article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=1");
+        "${ApiUrlConstants.baseUrl}article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=1");
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));
-        loading.value = false;
+        
       });
+      loading.value = false;
     }
   }
 }
+

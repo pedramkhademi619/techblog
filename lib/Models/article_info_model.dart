@@ -24,7 +24,7 @@ class ArticleInfoModel {
     id = info['id'];
     title = info['title'];
     content = info['content'];
-    image = ApiConstants.hostDlUrl + info['image'];
+    image = ApiUrlConstants.hostDlUrl + info['image'];
     author = info['author'];
     catId = info['cat_id'];
     view = info['view'];

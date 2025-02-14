@@ -11,9 +11,11 @@ import 'package:tech/view/article/single_manage_article.dart';
 import 'package:tech/view/main_screen/main_screen.dart';
 import 'package:tech/view/article/manage_article.dart';
 import 'package:tech/view/article/single.dart';
+import 'package:tech/view/podcast/single_manage_podcast.dart';
 import 'package:tech/view/splash_screen.dart';
 
 void main() async {
+  print("");
   await GetStorage.init();
   HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -57,6 +59,8 @@ class _HomePage extends State<HomePage> {
               name: NamedRoute.singleManageArticle,
               page: () => SingleManageArticle(),
               binding: ArticleManagerBinding()),
+          GetPage(
+              name: NamedRoute.singleManagepodcast, page: () => SinglePodcast())
         ],
         initialBinding: RegisterBinding(),
         locale: const Locale("fa"),
@@ -127,6 +131,12 @@ class _HomePage extends State<HomePage> {
               fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
+            titleLarge: const TextStyle().copyWith(
+              fontFamily: 'dana',
+              color: const Color.fromARGB(255, 0, 0, 0),
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
             //headline5
             titleMedium: const TextStyle().copyWith(
               fontFamily: 'dana',
@@ -152,9 +162,12 @@ class _HomePage extends State<HomePage> {
 }
 
 class NamedRoute {
+  NamedRoute._();
+
   static const String routeMainScreen = "/MainScreen";
   static const String routeSingleArticle = "/SingleArticle";
   static const String routeListArticle = "/ArticleList";
   static const String manageArticle = "/ManageArticle";
   static const String singleManageArticle = "/SingleManageArticle";
+  static const String singleManagepodcast = "/SingleManagePodcast";
 }

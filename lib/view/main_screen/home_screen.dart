@@ -7,7 +7,6 @@ import 'package:tech/controller/article/list_article_controller.dart';
 import 'package:tech/controller/article/single_article_controller.dart';
 import 'package:tech/main.dart';
 import 'package:tech/view/article/article_list_screen.dart';
-
 import '../../Models/fake_data.dart';
 import '../../components/constants/my_colors.dart';
 import '../../components/constants/strings.dart';
@@ -54,9 +53,10 @@ class HomeScreen extends StatelessWidget {
                   ),
 
                   //see more
-                  GestureDetector(onTap: (){
-                    Get.toNamed(NamedRoute.routeListArticle);
-                  },
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(NamedRoute.routeListArticle);
+                    },
                     child: SeeMoreBlog(
                       bodyMargin: bodyMargin,
                       textTheme: textTheme,
@@ -67,22 +67,27 @@ class HomeScreen extends StatelessWidget {
                   //blog list
                   topVisited(),
 
-                  Padding(
-                    padding: EdgeInsets.only(right: bodyMargin),
-                    child: Row(
-                      children: [
-                        ImageIcon(
-                          Assets.icons.bluemic.provider(),
-                          color: SolidColors.seeMore,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          MyStrings.viewHottestPodCasts,
-                          style: textTheme.headlineSmall,
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(right: bodyMargin),
+                      child: Row(
+                        children: [
+                          ImageIcon(
+                            Assets.icons.bluemic.provider(),
+                            color: SolidColors.seeMore,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            MyStrings.viewHottestPodCasts,
+                            style: textTheme.headlineSmall,
+                          )
+                        ],
+                      ),
                     ),
                   ),
 
@@ -207,43 +212,49 @@ class HomeScreen extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: homeScreenController.topPodcastList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: size.height / 5.3,
-                        width: size.width / 2.4,
-                        child: CachedNetworkImage(
-                          errorWidget: (context, url, error) => const Icon(
-                            Icons.image_not_supported,
-                            size: 50,
-                            color: Colors.grey,
-                          ),
-                          placeholder: (context, url) => loading(),
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () {
+                  Get.toNamed(NamedRoute.singleManagepodcast,
+                      arguments: homeScreenController.topPodcastList[index]);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: size.height / 5.3,
+                          width: size.width / 2.4,
+                          child: CachedNetworkImage(
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.image_not_supported,
+                              size: 50,
+                              color: Colors.grey,
+                            ),
+                            placeholder: (context, url) => loading(),
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
+                            imageUrl: homeScreenController
+                                .topPodcastList[index].poster!,
                           ),
-                          imageUrl: homeScreenController
-                              .topPodcastList[index].poster!,
                         ),
                       ),
-                    ),
-                    Text(
-                      homeScreenController.topPodcastList[index].title!,
-                      style: textTheme.titleSmall,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                  ],
+                      Text(
+                        homeScreenController.topPodcastList[index].title!,
+                        style: textTheme.titleSmall,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ],
+                  ),
                 ),
               );
             }),

@@ -21,20 +21,26 @@ class HomeScreenController extends GetxController {
   }
 
   getHomeItems() async {
-    
     loading.value = true;
     var response = await DioService().getMethod(ApiUrlConstants.getHomeItems);
     if (response.statusCode == 200) {
-      response.data["top_visited"].forEach((element) {
-        topVisitedList.add(ArticleModel.fromJson(element));
+      if (topVisitedList.isEmpty) {
+        response.data["top_visited"].forEach((element) {
+          topVisitedList.add(ArticleModel.fromJson(element));
+        });
+      }
+
+      if (topPodcastList.isEmpty) {
         response.data["top_podcasts"].forEach((element) {
           topPodcastList.add(PodCastModel.fromJson(element));
         });
-      });
-      tagsList.clear();
-      response.data["tags"].forEach((element) {
-        tagsList.add(TagsModel.fromJson(element));
-      });
+      }
+
+      if (tagsList.isEmpty) {
+        response.data["tags"].forEach((element) {
+          tagsList.add(TagsModel.fromJson(element));
+        });
+      }
 
       poster.value = PosterModel.fromJson(response.data["poster"]);
       loading.value = false;

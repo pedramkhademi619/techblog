@@ -9,18 +9,20 @@ class PodCastModel {
   String? createdAt;
 
   PodCastModel(
-      {required this.id,
-      required this.title,
-      required this.poster,
-      required this.publisher,
-      required this.view,
-      required this.createdAt});
+      {this.id,
+      this.title,
+      this.poster,
+      this.publisher,
+      this.view,
+      this.createdAt});
   PodCastModel.fromJson(Map<String, dynamic> element) {
     id = element["id"];
     title = element["title"];
     poster = ApiUrlConstants.hostDlUrl + element["poster"];
-    publisher = element["publisher"];
+    publisher = element["author"];
     view = element["view"];
     createdAt = element["createdAt"];
   }
 }
+
+

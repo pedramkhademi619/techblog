@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech/components/constants/dimens.dart';
 import 'package:tech/components/constants/my_colors.dart';
+import 'package:tech/components/decorations.dart';
 import 'package:tech/components/my_components.dart';
 import 'package:tech/components/constants/strings.dart';
 import 'package:tech/controller/register_controller.dart';
@@ -141,22 +142,18 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      right: 0,
-      bottom: 0,
-      left: 0,
+      right: Dimens.bodyMargin,
+      bottom: 8,
+      left: Dimens.bodyMargin,
       child: Container(
         height: Get.size.height / 10,
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                colors: GradiantColors.bottomNavBackGround,
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter)),
+        decoration: MyDecoration.mainGradiant,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin),
           child: Container(
             height: Get.size.height / 8,
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(36)),
+              borderRadius: BorderRadius.all(Radius.circular(18)),
               gradient: LinearGradient(
                 colors: GradiantColors.bottomNav,
               ),
